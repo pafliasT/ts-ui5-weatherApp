@@ -30,8 +30,8 @@ export default class Main extends BaseController {
 		// }
 	}
 
-	async loadWeatherData(lat = "49.31", lon = "8.64", placeName = "Walldorf") {
-		// default coordinates: Walldorf
+	async loadWeatherData(lat = "37.96", lon = "23.70", placeName = "Kallithea") {
+		// default coordinates: LITHEAKA
 		const response = await fetch(
 			`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
 		);

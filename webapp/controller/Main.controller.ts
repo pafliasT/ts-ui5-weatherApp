@@ -3,6 +3,7 @@ import BaseController from "./BaseController";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import * as Nominatim from "nominatim-client";
 import MessageBox from "sap/m/MessageBox";
+import Input from "sap/m/Input";
 
 type WeatherInfo = {
 	current_weather: {
@@ -66,5 +67,11 @@ export default class Main extends BaseController {
 					actions: MessageBox.Action.CLOSE, // enums are now properties on the default export!
 				});
 			});
+	}
+
+	async onRefreshPress() {
+		const location = this.byId("location") as Input;
+		location.setValue("");
+		await this.loadWeatherData();
 	}
 }

@@ -29,15 +29,20 @@ export default class WindDirection extends Control {
 		apiVersion: 2,
 		render: (rm: RenderManager, control: WindDirection) => {
 			rm.openStart("div", control);
+			rm.openStart("div", control);
+			rm.openEnd();
 			rm.style("font-size", "2rem");
 			rm.style("width", "2rem");
 			rm.style("height", "2rem");
 			rm.style("display", "inline-block");
-			rm.style("color", "blue");
+			rm.style("color", "black");
+			rm.style("vertical-align", "middle"); // Ensure it's aligned with text and icons
+			rm.style("text-align", "center"); // Center the arrow within the div
 			rm.style("transform-origin", "center");
-			rm.style("transform", `rotate(${control.getDirection() + 90}deg)`); // arrow is pointing right by default, direction 0 means blowing FROM the north, so the arrow has to point down
+			rm.style("transform", `rotate(${control.getDirection() + 90}deg)`);
 			rm.openEnd();
 			rm.text("➢");
+			rm.close("div");
 			rm.close("div");
 		},
 	};

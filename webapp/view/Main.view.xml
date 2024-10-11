@@ -23,55 +23,72 @@
 				fitContainer="true"
 				alignItems="Center"
 				justifyContent="Center"
-				class="sapUiSmallMargin">
+				class="sapUiLargeMargin">
 
-				<form:SimpleForm
-					id="weatherForm"
-					editable="false"
-					layout="ResponsiveGridLayout"
-					labelSpanL="4"
-					labelSpanM="4"
-					labelSpanS="12"
-					adjustLabelSpan="false"
-					emptySpanL="2"
-					emptySpanM="2"
-					columnsXL="1"
-					columnsL="1"
-					columnsM="1"
-					class="sapUiMediumMarginTop">
+				<Panel
+					headerText="Get Current Weather"
+					width="100%"
+					class="sapUiMediumMargin">
+					<content>
+						<HBox justifyContent="Center">
+							<Input
+								id="location"
+								valueLiveUpdate="true"
+								placeholder="Enter Location"
+								class="sapUiSmallMarginEnd"
+								ariaLabelledBy="locationLabel"
+								change=".locationChange" />
+							<!-- <Button text="Get Weather" press=".onRefreshPress" /> -->
+						</HBox>
+						<ToolbarSpacer></ToolbarSpacer>
 
-					<Title text="Current Weather Details" />
-					<Input
-						id="location"
-						valueLiveUpdate="true"
-						width="auto"
-						change=".locationChange"
-						placeholder="Enter Location"
-						class="sapUiSmallMarginBottom"
-						ariaLabelledBy="locationLabel" />
-					<Label text="Location" />
-					<Text
-						text="{/placeName}" class="sapUiSmallMarginBottom" />
+					</content>
+				</Panel>
 
-					<Label
-						text="Temperature" />
-					<Text text="{/current_weather/temperature} °C"
-						class="highlightText" />
+				<!-- Add the new placeName box here -->
+				<!-- <Panel headerText="Location" width="100%" class="sapUiMediumMarginBottom">
+					<content>
+					</content>
+				</Panel> -->
 
-					<Label text="Wind Speed" />
-					<Text
-						text="{/current_weather/windspeed} km/h" />
+				<Panel headerText="Current Weather Details" width="100%"
+					class="sapUiMediumMargin">
+					<content>
+						<HBox justifyContent="Center" alignItems="Center"
+							class="sapUiLargeMargin">
+							<core:Icon src="sap-icon://map" size="2rem" class="sapUiSmallMarginEnd" />
+							<Text text="{/placeName}" />
+						</HBox>
 
-					<Label text="Wind Direction" />
-					<Text
-						text="{/current_weather/winddirection} °" />
+						<HBox justifyContent="Center" alignItems="Center"
+							class="sapUiLargeMargin">
+							<core:Icon src="sap-icon://temperature" size="2rem"
+								class="sapUiSmallMarginEnd" />
+							<Text text="{/current_weather/temperature} °C" class="highlightText" />
+						</HBox>
 
-					<Label text="Wind Visualization" />
-					<layout:HorizontalLayout>
-						<cc:WindDirection direction="{/current_weather/winddirection}"
-							class="sapUiTinyMarginTop" />
-					</layout:HorizontalLayout>
-				</form:SimpleForm>
+						<HBox justifyContent="Center" alignItems="Center"
+							class="sapUiLargeMargin">
+							<core:Icon src="sap-icon://weather-proofing" size="2rem"
+								class="sapUiSmallMarginEnd" />
+							<Text text="{/current_weather/windspeed} km/h" />
+						</HBox>
+
+						<!-- <HBox justifyContent="Center" alignItems="Center"
+							class="sapUiLargeMargin">
+							<core:Icon src="sap-icon://direction-arrows" size="2rem"
+								class="sapUiSmallMarginEnd" />
+							<Text text="{/current_weather/winddirection} °" />
+						</HBox> -->
+
+						<HBox justifyContent="Center" alignItems="Center" class="sapUiLargeMargin">
+							<cc:WindDirection direction="{/current_weather/winddirection}"
+								class="sapUiSmallMediumEnd" />
+						</HBox>
+						<Text text="" />
+					</content>
+
+				</Panel>
 
 				<FormattedText
 					class="sapUiTinyMarginTop"

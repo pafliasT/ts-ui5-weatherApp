@@ -1,0 +1,23 @@
+_schema-version: '3.1'
+ID: com.myorg.myapp
+version: 1.0.0
+description: "UI5 Application: com.myorg.myapp"
+
+parameters:
+  enable-parallel-deployments: true
+
+modules:
+  - name: com.myorg.myapp-ui
+    type: html5
+    path: .  
+    parameters:
+      memory: 512M
+      disk-quota: 256M
+      buildpack: staticfile_buildpack
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - ui5 build --all
+

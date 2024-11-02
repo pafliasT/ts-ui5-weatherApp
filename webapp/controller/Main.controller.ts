@@ -4,6 +4,7 @@ import JSONModel from "sap/ui/model/json/JSONModel";
 import * as Nominatim from "nominatim-client";
 import MessageBox from "sap/m/MessageBox";
 import Input from "sap/m/Input";
+import BusyIndicator from "sap/ui/core/BusyIndicator";
 
 type WeatherInfo = {
 	current_weather: {
@@ -32,20 +33,21 @@ export default class Main extends BaseController {
 	}
 
 	async loadWeatherData(lat = "37.96", lon = "23.70", placeName = "Kallithea") {
-		// default coordinates: LITHEAKA
+		BusyIndicator.show(0);
 		const response = await fetch(
 			`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
 		);
 		const jsonData = (await response.json()) as WeatherInfo;
 		jsonData.placeName = placeName;
 		(this.getModel() as JSONModel).setData(jsonData);
+		BusyIndicator.hide();
 	}
 
 	locationChange(evt: InputBase$ChangeEvent) {
 		const location = evt.getParameters().value;
 
 		Nominatim.createClient({
-			useragent: "UI5 TypeScript Tutorial App", // useragent and referrer required by the terms of use
+			useragent: "UI5 TypeScript Tutorial App", // useragent and referrer required 
 			referer: "https://localhost",
 		})
 			.search({ q: location })
@@ -55,7 +57,7 @@ export default class Main extends BaseController {
 						results[0].lat,
 						results[0].lon,
 						results[0].display_name
-					); // for simplicity just use the first/best match
+					); // for simplicity use the first/best match
 				} else {
 					MessageBox.alert(`Location ${location} not found`, {
 						actions: MessageBox.Action.CLOSE, // enums are now properties on the default export!
@@ -64,7 +66,7 @@ export default class Main extends BaseController {
 			})
 			.catch(() => {
 				MessageBox.alert(`Failure while searching ${location}`, {
-					actions: MessageBox.Action.CLOSE, // enums are now properties on the default export!
+					actions: MessageBox.Action.CLOSE, 
 				});
 			});
 	}
